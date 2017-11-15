@@ -5,14 +5,14 @@ this is mostly a personal project to learn shiny apps (see https://www.shinyapps
 
 to run: 
 
--install package "shiny" in R
-```
+- install package "shiny" in R
+```r
 install.packages("shiny")
 ```
 
--set working directory to folder containing the app
+- set working directory to folder containing the app
 
--run the command:
-```
+- run the command:
+```r
 runApp("hypergeomagic")
 ```

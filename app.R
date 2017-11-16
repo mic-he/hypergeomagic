@@ -4,7 +4,7 @@
 library(shiny)
 library(ggplot2)
 
-## Define UI for app that draws a histogram ----
+## Define UI for app ----
 ui <- fluidPage(
   
   # App title ----
@@ -16,30 +16,27 @@ ui <- fluidPage(
     # Sidebar panel for inputs ----
     sidebarPanel(
       
-      # Input: Slider for the number of bins ----
-      sliderInput(inputId = "pop",
+      # Input: Slider for the number of cards ----
+      numericInput(inputId = "pop",
                   label = "deck size:",
-                  min = 30,
-                  max = 100,
-                  value = 40),
+                  step=1,
+                  value = 0),
       
-      sliderInput(inputId = "tot_hits",
+      numericInput(inputId = "tot_hits",
                   label = "# of hits in deck:",
-                  min = 1,
-                  max = 100,
-                  value = 1),
+                  step=1,
+                  value = 0),
       
-      sliderInput(inputId = "min_hits",
+      numericInput(inputId = "min_hits",
                   label = "# of desired hits:",
-                  min = 1,
-                  max = 100,
+                  step=1,
                   value = 1)
     ),
     
     # Main panel for displaying outputs ----
     mainPanel(
       
-      # Output: Histogram ----
+      # Output: plot ----
       plotOutput(outputId = "distPlot")
       
     )

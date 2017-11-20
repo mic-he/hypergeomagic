@@ -2,7 +2,6 @@
 
 ## load library
 library(shiny)
-library(ggplot2)
 
 ## Define UI for app ----
 ui <- fluidPage(
@@ -16,28 +15,28 @@ ui <- fluidPage(
     # Sidebar panel for inputs ----
     sidebarPanel(
       
-      # Input: Slider for the number of cards ----
+      # Input: numeric inputs for the number of cards ----
       numericInput(inputId = "pop",
                   label = "deck size:",
                   step=1,
-                  value = 0),
+                  value = 40),
       
       numericInput(inputId = "tot_hits",
                   label = "# of hits in deck:",
                   step=1,
-                  value = 0),
+                  value = 17),
       
       numericInput(inputId = "min_hits",
                   label = "# of desired hits:",
                   step=1,
-                  value = 1)
+                  value = 3)
     ),
     
     # Main panel for displaying outputs ----
     mainPanel(
       
       # Output: plot ----
-      plotOutput(outputId = "distPlot")
+      tableOutput("table")
       
     )
   )
@@ -47,16 +46,12 @@ ui <- fluidPage(
 ## Define server logic required to draw a histogram ----
 server <- function(input, output) {
   
-  # Plot of the probability mass of drawing at least one card
+  # Table of the probability mass of drawing at least min_hits card
   # of the wanted type given 7, 8, ..., 17 looks and having #hits and size as input
   
-  # This expression that generates a plot is wrapped in a call
-  # to renderPlot to indicate that:
-  #
-  # 1. It is "reactive" and therefore should be automatically
-  #    re-executed when inputs change
-  # 2. Its output type is a plot
-  output$distPlot <- renderPlot({
+  # The expression that generates a plot is wrapped in a call
+  # to renderTable which takes same inputs as xtable to generate html code for the table
+  output$table <- renderTable({
     
     myhyper <- function(min_hits, tot_hits, pop, looks){
       probabilities <- dhyper(min_hits, tot_hits, pop-tot_hits, looks)-phyper(min_hits, tot_hits, pop-tot_hits, looks)+1
@@ -64,9 +59,9 @@ server <- function(input, output) {
     }
     
     looks <- 7:17
-    probabilities <- myhyper(input$min_hits, input$tot_hits, input$pop, looks)
+    probabilities <- round(myhyper(input$min_hits, input$tot_hits, input$pop, looks),3)
     
-    plot(x=looks, y=probabilities)
+    matrix(c(as.character(looks-7),probabilities), ncol=2, dimnames=list(c(),c("turn","probability")))
     
   })
   

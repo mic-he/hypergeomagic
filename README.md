@@ -1,9 +1,13 @@
 # hypergeomagic shiny app --work in progress
-Magic: the Gathering specific hypergeometric calculator
 
-this is mostly a personal project to learn shiny apps (see https://www.shinyapps.io/)
+magic the gathering specific hypergeometric calculator
 
-to run: 
+this is a small personal project to learn shiny apps (see https://www.shinyapps.io/)
+the project is open-ended, the complete list of features still to be decided 
+
+basic functionality so far: compute the probability of hitting at least X cards of a certain kind, given a deck of N cards containing K successes, and 7 to 17 draws (i.e., from turn 1 to turn 10, disregarding mulligans and card draw/scry effects)
+
+how to run: 
 
 - install package "shiny" in R
 ```r
@@ -16,3 +20,11 @@ install.packages("shiny")
 ```r
 runApp("hypergeomagic")
 ```
+
+to do:
+
+- allow for variable number of draws
+- return probability of hitting exactly X cards
+- add descriptive text, maybe some visualization
+- improve overall look of the app
+- ...

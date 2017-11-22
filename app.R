@@ -67,8 +67,8 @@ server <- function(input, output) {
     matrix(c(as.character(looks-6), unlist(probabilities[1]), unlist(probabilities[2])),
            ncol=3, dimnames=list(c(),
                                  c("turn",
-                                   paste("at least ", input$min_hits),
-                                   paste("exactly", input$min_hits))))
+                                   paste("exactly ", input$min_hits),
+                                   paste("at least", input$min_hits))))
     
   })
   

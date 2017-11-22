@@ -46,7 +46,7 @@ ui <- fluidPage(
 ## Define server logic required to draw a histogram ----
 server <- function(input, output) {
   
-  # Table of the probability mass of drawing at least min_hits card
+  # Table of the probability mass of drawing at least min_hits card and exactly min_hits cards
   # of the wanted type given 7, 8, ..., 17 looks and having #hits and size as input
   
   # The expression that generates a plot is wrapped in a call
@@ -54,14 +54,21 @@ server <- function(input, output) {
   output$table <- renderTable({
     
     myhyper <- function(min_hits, tot_hits, pop, looks){
-      probabilities <- dhyper(min_hits, tot_hits, pop-tot_hits, looks)-phyper(min_hits, tot_hits, pop-tot_hits, looks)+1
-      return(probabilities)
+      exactly <- round(dhyper(min_hits, tot_hits, pop-tot_hits, looks), 3)
+      at_least <- round(dhyper(min_hits, tot_hits, pop-tot_hits, looks)
+                        -phyper(min_hits, tot_hits, pop-tot_hits, looks)+1,
+                        3)
+      return(list(exactly, at_least))
     }
     
     looks <- 7:17
-    probabilities <- round(myhyper(input$min_hits, input$tot_hits, input$pop, looks),3)
+    probabilities <- myhyper(input$min_hits, input$tot_hits, input$pop, looks)
     
-    matrix(c(as.character(looks-7),probabilities), ncol=2, dimnames=list(c(),c("turn","probability")))
+    matrix(c(as.character(looks-6), unlist(probabilities[1]), unlist(probabilities[2])),
+           ncol=3, dimnames=list(c(),
+                                 c("turn",
+                                   paste("at least ", input$min_hits),
+                                   paste("exactly", input$min_hits))))
     
   })
   

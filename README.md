@@ -23,8 +23,6 @@ runApp("hypergeomagic")
 
 to do:
 
-- allow for variable number of draws
-- add option on the play/on the draw
 - add descriptive text, maybe some visualization
 - improve overall look of the app
 - ...

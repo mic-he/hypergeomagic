@@ -8,7 +8,7 @@ the project is open-ended, the complete list of features still to be decided
 functionality so far: compute and diplay the probability of hitting at least X, and exactly X, cards of a certain kind, given a deck of N cards containing K successes, and a variable number of draws; on the play/on the draw is also implemented
 
 how to run: 
-
+- download the app
 - install package "shiny" in R
 ```r
 install.packages("shiny")
@@ -21,6 +21,11 @@ install.packages("shiny")
 runApp("hypergeomagic")
 ```
 
+alternatively:
+```r
+library(shiny)
+runGitHub( "hypergeomagic", "mic-he")
+```
 to do:
 
 - add descriptive text

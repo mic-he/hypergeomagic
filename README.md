@@ -24,7 +24,7 @@ runApp("hypergeomagic")
 alternatively:
 ```r
 library(shiny)
-runGitHub( "hypergeomagic", "mic-he")
+runGitHub("hypergeomagic", "mic-he")
 ```
 to do:
 

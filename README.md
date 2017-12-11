@@ -16,12 +16,13 @@ install.packages("shiny")
 
 - set working directory to folder containing the app
 
-- run the command:
+- run the app:
 ```r
+library(shiny)
 runApp("hypergeomagic")
 ```
 
-alternatively:
+alternatively, download and run in one command:
 ```r
 library(shiny)
 runGitHub("hypergeomagic", "mic-he")

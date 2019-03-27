@@ -1,4 +1,4 @@
-# hypergeomagic shiny app --work in progress
+# hypergeoMagic shiny app --work in progress
 
 magic the gathering specific hypergeometric calculator
 
